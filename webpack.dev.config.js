@@ -1,27 +1,22 @@
-const path = require('path');
-const monkey = require('./monkey.dev.config');
-const fs = require("fs");
+const path = require('path')
+const monkey = require('./monkey.dev.config')
+const fs = require("fs")
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Terser = require('terser-webpack-plugin')
 
 if (!fs.existsSync("test"))
-    fs.mkdirSync("test");
-fs.writeFileSync("./test/header.js",getHeader());
+    fs.mkdirSync("test")
+fs.writeFileSync("./test/header.js", monkey.buildedHeader())
 
 module.exports = [{
-    entry: './src/monkey.js',
+    entry: monkey.config.entry,
     output: {
         path: path.resolve(__dirname, 'test'),
-        filename: monkey.name.toLowerCase().replace(" ", "-") + '.js'
+        filename: monkey.header.name.toLowerCase().replace(" ", "-") + '.js'
     },
     mode: "none",
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                loader: "babel-loader"
-            }, {
+        rules: [ {
                 test: /\.css$/,
                 exclude: /(node_modules)/,
                 use: [
@@ -35,8 +30,8 @@ module.exports = [{
         ],
     },
     plugins: [
-        new UglifyJsPlugin({
-            uglifyOptions: {
+        new Terser({
+            terserOptions: {
                 mangle: false,
                 output: {
                     beautify: true,
@@ -44,23 +39,4 @@ module.exports = [{
             }
         })
     ]
-}];
-
-function getHeader() {
-    let headerString = [];
-    headerString.push("// ==UserScript==");
-    for (let headerKey in monkey) {
-        if (Array.isArray(monkey[headerKey])) {
-            for (let p in monkey[headerKey]) {
-                headerString.push("// @" + headerKey.padEnd(13) + monkey[headerKey][p]);
-            }
-            headerString.push("//  ");
-        } else {
-            headerString.push("// @" + headerKey.padEnd(13) + monkey[headerKey]);
-        }
-    }
-    headerString.push("// ==/UserScript==");
-    headerString.push("  ");
-    return headerString.join("\n");
-
-}
+}]

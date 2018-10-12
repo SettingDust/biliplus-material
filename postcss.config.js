@@ -3,4 +3,4 @@ module.exports = {
         'autoprefixer': {browsers: 'cover 95%'},
         'cssnano': {}
     }
-};
+}

@@ -1,0 +1,45 @@
+@import '../../node_modules/material-colors/dist/colors.styl'
+
+body {
+  margin: 0;
+  background-color: md-white;
+  max-height: 100vh;
+  min-width: 360px;
+  overflow: hidden;
+  color: md-dark-text-primary;
+  font-family: 'Noto Sans SC', 'Microsoft YaHei UI', 'Microsoft YaHei UI Light', '微软雅黑', 'Segoe UI Semibold', 'Roboto', sans-serif;
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  main {
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-height: calc(100vh - 64px);
+    min-width: 360px;
+  }
+  
+  p {
+    margin: 0;
+    word-break: break-all;
+  }
+  
+  .tooltipster-customized .tooltipster-box {
+    background: md-grey-900;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: md-grey-800;
+    border: none;
+  }
+  
+  .tooltipster-customized .tooltipster-content {
+    color: md-light-text-primary;
+    padding: 6px 8px;
+    line-height: 16px;
+  }
+  
+  @import 'include/header.styl';
+  @import 'include/card.styl';
+}

@@ -1,13 +1,11 @@
-const Router = require('./util/Router'),
-    logger = require('./util/Logger'),
+const Router = require('./util/router'),
+    logger = require('./util/logger'),
     Route = require('./util/route'),
     router = new Router(),
     url = require('url');
 
 const hrefObj = url.parse(location.href);
 const href = `${hrefObj.host}${hrefObj.pathname}`;
-
-
 
 router.push(new Route('', require('./routes/index')));
 

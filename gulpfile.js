@@ -6,11 +6,11 @@ const colors = require('colors');
 
 const paths = {
     stylus: {
-        all: './src/javascript/routes/**/*.styl',
-        main: './src/javascript/routes/**/style.styl'
+        all: './src/style/**/*.styl',
+        main: './src/style/*.styl'
     },
     js: {
-        all: './javascript/**/*.js'
+        all: ['./javascript/**/*.js', './*.js', './dist/*.js']
     }
 };
 
@@ -18,7 +18,7 @@ gulp.task('format:js', () => {
     return gulp
         .src(paths.js.all)
         .pipe(prettier())
-        .pipe(gulp.dest((file) => file.base));
+        .pipe(gulp.dest(file => file.base));
 });
 
 gulp.task('format', gulp.series(gulp.parallel('format:js')));
@@ -27,12 +27,14 @@ gulp.task('stylus', () => {
     return gulp
         .src(paths.stylus.all)
         .pipe(stylus())
-        .pipe(gulp.dest((file) => file.base));
+        .pipe(gulp.dest(file => file.base));
 });
 
-gulp.task('stylus:watch', () => gulp.watch(paths.stylus.all).on('change', gulp.series('stylus')));
+gulp.task('stylus:watch', () =>
+    gulp.watch(paths.stylus.all).on('change', gulp.series('stylus'))
+);
 
-gulp.task('webpack', (callback) =>
+gulp.task('webpack', callback =>
     webpack(require('./webpack.config'), (err, stats) => {
         callback();
         if (err) console.log(err);
@@ -64,4 +66,7 @@ gulp.task('webpack:dev', () =>
 
 gulp.task('build', gulp.series('stylus', 'webpack', 'format'));
 
-gulp.task('default', gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack:dev')));
+gulp.task(
+    'default',
+    gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack:dev'))
+);

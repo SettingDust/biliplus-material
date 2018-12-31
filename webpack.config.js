@@ -15,6 +15,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(tpl|nunjucks|njk)$/,
+                exclude: /(node_modules)/,
+                use: [{ loader: 'nunjucks-loader' }]
+            },
+            {
                 test: /\.css$/,
                 exclude: /(node_modules)/,
                 use: [{ loader: 'css-loader' }, { loader: 'postcss-loader' }]

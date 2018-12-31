@@ -1,4 +1,4 @@
-const logger = require('./Logger');
+const logger = require('./logger');
 module.exports = class Router {
     constructor() {
         this._routes = [];

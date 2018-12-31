@@ -3,10 +3,10 @@
  */
 class Color {
     constructor() {
-        this._r = 0
-        this._g = 0
-        this._b = 0
-        this._a = 0
+        this._r = 0;
+        this._g = 0;
+        this._b = 0;
+        this._a = 0;
     }
 
     get r() {
@@ -47,8 +47,17 @@ class Color {
      */
     toString() {
         if (this.a > 0)
-            return "rgba(" + this.r + "," + this.g + "," + this.b + "," + this.a + ")"
-        else
-            return "rgb(" + this.r + "," + this.g + "," + this.b + ")"
+            return (
+                'rgba(' +
+                this.r +
+                ',' +
+                this.g +
+                ',' +
+                this.b +
+                ',' +
+                this.a +
+                ')'
+            );
+        else return 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
     }
 }

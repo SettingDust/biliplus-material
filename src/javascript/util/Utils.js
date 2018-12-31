@@ -1,5 +1,5 @@
-let head = $("head")
-let body = $("body")
+let head = $('head');
+let body = $('body');
 
 /**
  * 对一段文本通过换行符做双空格缩进（很蠢的方法了hh
@@ -7,27 +7,26 @@ let body = $("body")
  * @returns {string} 缩进后文本
  */
 function addSpace(code) {
-    let s = ""
-    code.split('\n').forEach((e) => {
-        s += "  " + e
-    })
-    return s
+    let s = [];
+    code.split('\n').forEach(e => {
+        s.push(e);
+    });
+    return s.join('\n');
 }
 
 function addExternalStyle(link) {
-    let elem = $("<style\>")
-    elem.attr("href", link)
-    elem.attr("rel", "stylesheet")
-    elem.appendTo(body)
-    return elem
+    let elem = $('<style>');
+    elem.attr('href', link);
+    elem.attr('rel', 'stylesheet');
+    elem.appendTo(body);
+    return elem;
 }
 
 function setThemeColor(color) {
-    let elem = $("meta[name='theme-color']")
-    if (elem.length === 0)
-        elem = $("<meta\>")
-    elem.attr("name", "theme-color")
-    elem.attr("content", color.toString())
-    elem.appendTo(head)
-    return elem
+    let elem = $("meta[name='theme-color']");
+    if (elem.length === 0) elem = $('<meta>');
+    elem.attr('name', 'theme-color');
+    elem.attr('content', color.toString());
+    elem.appendTo(head);
+    return elem;
 }

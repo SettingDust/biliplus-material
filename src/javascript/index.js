@@ -5,10 +5,12 @@ const Router = require('./util/Router'),
     url = require('url');
 
 const hrefObj = url.parse(location.href);
-const href = url.resolve(hrefObj.host, hrefObj.pathname);
+const href = `${hrefObj.host}${hrefObj.pathname}`;
+
+
 
 router.push(new Route('', require('./routes/index')));
 
 router.load(href);
 
-logger.info(href);
+logger.debug(href);

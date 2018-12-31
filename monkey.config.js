@@ -3,7 +3,7 @@ let version = '3.0.0';
 let description = 'A theme to biliplus';
 
 const config = {
-    entry: './src/javascript/BiliPlusMaterial.js'
+    entry: './src/javascript/index.js'
 };
 
 const header = {

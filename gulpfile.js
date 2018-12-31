@@ -25,7 +25,7 @@ gulp.task('format', gulp.series(gulp.parallel('format:js')));
 
 gulp.task('stylus', () => {
     return gulp
-        .src(paths.stylus.all)
+        .src(paths.stylus.main)
         .pipe(stylus())
         .pipe(gulp.dest(file => file.base));
 });

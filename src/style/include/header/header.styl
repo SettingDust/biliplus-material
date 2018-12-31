@@ -1,7 +1,7 @@
-@import '../../../node_modules/material-colors/dist/colors.styl';
-@import '../../../node_modules/material-shadows/material-shadows.styl'
+@import '../../../../node_modules/material-colors/dist/colors.styl';
+@import '../../../../node_modules/material-shadows/material-shadows.styl'
 
-.header {
+#header {
   height: 64px;
   padding-left: 14px;
   padding-right: 14px;
@@ -13,6 +13,10 @@
   transition: 125ms ease-in-out;
   z-index: 10;
   position: relative;
+  
+  .space {
+    flex: 1 0;
+  }
   
   > .title {
     font-size: 1.25rem;
@@ -34,12 +38,7 @@
   > nav {
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
     margin-right: 16px;
-    
-    .space {
-      flex: 1 0;
-    }
     
     ul {
       display: flex;
@@ -52,17 +51,6 @@
           font-size: 24px;
           line-height: 24px;
           border-radius: 50%;
-          
-          .icon {
-            padding: 8px;
-            display: flex;
-            
-            svg {
-              height: 24px;
-              width: 24px;
-              fill: md-dark-icons-active;
-            }
-          }
           
           &:hover {
             background-color: rgba(0, 0, 0, 0.06);
@@ -83,4 +71,6 @@
     padding-left: 16px;
     padding-right: 16px;
   }
+  
+  @import "search.styl"
 }

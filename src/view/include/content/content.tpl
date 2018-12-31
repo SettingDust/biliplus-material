@@ -1,6 +1,6 @@
 {% extends "../layout.tpl" %}
 {% block body %}
-    <header class="header">
+    <header id="header">
         {% include "../header/header.tpl" %}
         {% block header %}{% endblock %}
     </header>

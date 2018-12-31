@@ -1,0 +1,42 @@
+@import '../../../../node_modules/material-colors/dist/colors.styl';
+@import '../../../../node_modules/material-shadows/material-shadows.styl'
+
+#header-search {
+  display: flex;
+  line-height: 48px;
+  height: 48px;
+  border-radius: 8px;
+  align-items: center;
+  background-color: md-grey-100;
+  transition: 125ms;
+  overflow: hidden;
+  flex: 1 1 50vw;
+  max-width: 720px;
+  
+  .icon {
+    display: flex;
+    padding: 12px 16px;
+    
+    svg {
+      height: 24px;
+      width: 24px;
+      fill: md-dark-icons-active;
+    }
+  }
+  
+  label {
+    display: flex;
+    height: 48px;
+    width: 100%;
+  }
+  
+  input {
+    font-family: 'Noto Sans SC', 'Microsoft YaHei UI', 'Microsoft YaHei UI Light', '微软雅黑', 'Segoe UI Semibold', 'Roboto', sans-serif;
+    background-color: transparent;
+    color: md-dark-text-primary;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+  }
+}

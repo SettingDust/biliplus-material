@@ -2,6 +2,6 @@
 <div class="space"></div>
 {% include "./search.tpl" %}
 <div class="space"></div>
-<nav>
-    {% include "./nav/nav.tpl" %}
-</nav>
+<div id="avatar">
+    <div class="icon"></div>
+</div>

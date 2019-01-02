@@ -17,7 +17,10 @@ module.exports = {
             {
                 test: /\.(tpl|nunjucks|njk)$/,
                 exclude: /(node_modules)/,
-                use: [{ loader: 'nunjucks-loader' }]
+                use: [
+                    { loader: 'nunjucks-loader' },
+                    { loader: 'htmlclean-loader' }
+                ]
             },
             {
                 test: /\.css$/,
@@ -31,14 +34,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new Terser({
-            terserOptions: {
-                mangle: false,
-                output: {
-                    beautify: true
-                }
-            }
-        }),
+        // new Terser({
+        //     terserOptions: {
+        //         mangle: false,
+        //         output: {
+        //             beautify: true
+        //         }
+        //     }
+        // }),
         new BannerPlugin({
             banner: monkey.buildedHeader(),
             raw: true

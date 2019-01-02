@@ -13,7 +13,7 @@ const header = {
     author: 'SettingDust',
     include: ['http*://*.biliplus.com/*'],
     require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
-    grant: ['GM_addStyle']
+    grant: ['GM_addStyle', 'GM_getValue', 'GM_setValue', 'GM_listValues']
 };
 module.exports.config = config;
 module.exports.header = header;

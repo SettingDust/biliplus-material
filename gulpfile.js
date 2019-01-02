@@ -40,12 +40,12 @@ gulp.task('webpack', callback =>
         if (err) console.log(err);
         console.log(
             `[` +
-            colors.grey('Webpack') +
-            `]` +
-            ` Build ` +
-            `'${stats.hash}'`.cyan +
-            ` after ` +
-            `${stats.endTime - stats.startTime}ms`.magenta
+                colors.grey('Webpack') +
+                `]` +
+                ` Build ` +
+                `'${stats.hash}'`.cyan +
+                ` after ` +
+                `${stats.endTime - stats.startTime}ms`.magenta
         );
     })
 );
@@ -54,12 +54,12 @@ gulp.task('webpack:dev', () =>
         if (err) console.log(err);
         console.log(
             `[` +
-            colors.grey('Webpack') +
-            `]` +
-            ` Build ` +
-            `'${stats.hash}'`.cyan +
-            ` after ` +
-            `${stats.endTime - stats.startTime}ms`.magenta
+                colors.grey('Webpack') +
+                `]` +
+                ` Build ` +
+                `'${stats.hash}'`.cyan +
+                ` after ` +
+                `${stats.endTime - stats.startTime}ms`.magenta
         );
     })
 );

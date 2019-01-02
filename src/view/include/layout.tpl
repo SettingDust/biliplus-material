@@ -2,7 +2,7 @@
     {% include "./head/head.tpl" %}
     {% block head %}{% endblock %}
     <title>
-        {{ title }}{% block title %}{% endblock %}
+        {{ pageTitle }}
     </title>
 </head>
 <body>

@@ -31,6 +31,6 @@ class Route {
 
 module.exports = class BiliPlusRoute extends Route {
     constructor(url, route) {
-        super('www.biliplus.com/' + url, route);
+        super('www\\\.biliplus\\\.com/' + url, route);
     }
 };

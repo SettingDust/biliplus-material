@@ -8,11 +8,13 @@ const colors = require('colors');
 if (!fs.existsSync('test')) fs.mkdirSync('test');
 fs.writeFileSync('./test/header.js', monkey.buildedHeader());
 
+const now = new Date();
 console.log(
-    `[` +
-        colors.grey('Webpack') +
-        `]` +
-        ' Copy the content of test/header.js to your TamperMonkey plugin'.green
+    `[${colors.grey(
+        `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+    )}][${colors.grey('Webpack')}] ${colors.green(
+        'Copy the content of test/header.js to your TamperMonkey plugin'
+    )}`
 );
 
 module.exports = {

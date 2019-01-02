@@ -1,7 +1,8 @@
 const gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     prettier = require('gulp-prettier'),
-    webpack = require('webpack');
+    webpack = require('webpack'),
+    moment = require('moment');
 const colors = require('colors');
 
 const paths = {
@@ -39,13 +40,11 @@ gulp.task('webpack', callback =>
         callback();
         if (err) console.log(err);
         console.log(
-            `[` +
-                colors.grey('Webpack') +
-                `]` +
-                ` Build ` +
-                `'${stats.hash}'`.cyan +
-                ` after ` +
-                `${stats.endTime - stats.startTime}ms`.magenta
+            `[${colors.grey(`${moment().format('HH:mm:ss')}`)}][${colors.grey(
+                'Webpack'
+            )}] Build '${colors.cyan(stats.hash)}' after ${colors.magenta(
+                `${moment(stats.endTime).diff(moment(stats.startTime))}ms`
+            )}`
         );
     })
 );
@@ -53,13 +52,11 @@ gulp.task('webpack:dev', () =>
     webpack(require('./webpack.dev.config'), (err, stats) => {
         if (err) console.log(err);
         console.log(
-            `[` +
-                colors.grey('Webpack') +
-                `]` +
-                ` Build ` +
-                `'${stats.hash}'`.cyan +
-                ` after ` +
-                `${stats.endTime - stats.startTime}ms`.magenta
+            `[${colors.grey(`${moment().format('HH:mm:ss')}`)}][${colors.grey(
+                'Webpack'
+            )}] Build '${colors.cyan(stats.hash)}' after ${colors.magenta(
+                `${moment(stats.endTime).diff(moment(stats.startTime))}ms`
+            )}`
         );
     })
 );

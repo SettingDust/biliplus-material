@@ -11,6 +11,7 @@
 // @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @grant        GM_listValues
 // ==/UserScript==
 
 /******/ (function(modules) {
@@ -164,7 +165,10 @@
                     .css('background-image', `url(${vars.user.face})`);
             });
 
-            router.push(new Route('', __webpack_require__(15)));
+            router.push(new Route('$', __webpack_require__(15)));
+            //Whitelist
+            router.push(new Route('[api|me]'));
+            router.push(new Route('.*', __webpack_require__(32)));
 
             router.load(href);
 
@@ -235,7 +239,12 @@
                 author: 'SettingDust',
                 include: ['http*://*.biliplus.com/*'],
                 require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
-                grant: ['GM_addStyle', 'GM_getValue', 'GM_setValue']
+                grant: [
+                    'GM_addStyle',
+                    'GM_getValue',
+                    'GM_setValue',
+                    'GM_listValues'
+                ]
             };
             module.exports.config = config;
             module.exports.header = header;
@@ -301,7 +310,7 @@
 
             module.exports = class BiliPlusRoute extends Route {
                 constructor(url, route) {
-                    super('www.biliplus.com/' + url, route);
+                    super('www\\.biliplus\\.com/' + url, route);
                 }
             };
 
@@ -1987,11 +1996,24 @@
             /***/
         },
         /* 14 */
-        /***/ function(module, exports) {
+        /***/ function(module, exports, __webpack_require__) {
+            const logger = __webpack_require__(2);
+
+            let loginInfo;
+            if (loginInfo) GM_setValue('user', loginInfo);
+            const user = GM_getValue('user');
+
             module.exports = {
-                user: loginInfo,
+                user,
                 config: {
                     title: 'BiliPlus'
+                },
+                api: {
+                    dynamic: {
+                        video: '/me/dynamic/page/1/',
+                        bangumi: '/me/dynamic/page/102/',
+                        comment: '/me/dynamic/page/101/'
+                    }
                 }
             };
 
@@ -2007,6 +2029,7 @@
                 config.pageTitle = `${vars.user.uname} - ${config.title}`;
                 document.documentElement.innerHTML = tpl.render(config);
                 GM_addStyle(__webpack_require__(30).toString());
+                // TODO 加焦点效果
             };
 
             /***/
@@ -8101,7 +8124,7 @@
                         try {
                             var parentTemplate = null;
                             output +=
-                                '<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Noto+Sans+SC:400,500&amp;subset=chinese-simplified"><link rel="stylesheet" href="https://cdn.bootcss.com/Ripple.js/1.2.1/ripple.min.css">';
+                                '<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Noto+Sans+SC:400,500&amp;subset=chinese-simplified"><link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet"><link rel="stylesheet" href="https://cdn.bootcss.com/Ripple.js/1.2.1/ripple.min.css">';
                             if (parentTemplate) {
                                 parentTemplate.rootRenderFunc(
                                     env,
@@ -8271,7 +8294,7 @@
                         try {
                             var parentTemplate = null;
                             output +=
-                                '<div id="header-search"> <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></span> <label><input type="text" placeholder="搜索你想要的"></label></div>';
+                                '<div id="header-search"> <span class="icon"><i class="material-icons">search</i></span> <label><input type="text" placeholder="搜索你想要的" maxlength="64"></label></div>';
                             if (parentTemplate) {
                                 parentTemplate.rootRenderFunc(
                                     env,
@@ -8373,7 +8396,7 @@
             // Module
             exports.push([
                 module.i,
-                'body{margin:0;background-color:#fff;max-height:100vh;min-width:360px;overflow:hidden;color:rgba(0,0,0,.87);font-family:Noto Sans SC,Microsoft YaHei UI,Microsoft YaHei UI Light,微软雅黑,Segoe UI Semibold,Roboto,sans-serif}body ul{margin:0;padding:0}body main{overflow-y:auto;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;max-height:-webkit-calc(100vh - 64px);max-height:-moz-calc(100vh - 64px);max-height:calc(100vh - 64px);min-width:360px}body p{margin:0;word-break:break-all}body .tooltipster-customized .tooltipster-box{background:#212121;-moz-border-radius:4px;border-radius:4px;font-size:12px;background-color:#424242;border:none}body .tooltipster-customized .tooltipster-content{color:#fff;padding:6px 8px;line-height:16px}body #header{height:64px;padding-left:14px;padding-right:14px;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap;color:rgba(0,0,0,.87);background-color:#fff;-webkit-transition:125ms ease-in-out;-o-transition:125ms ease-in-out;-moz-transition:125ms ease-in-out;transition:125ms ease-in-out;z-index:10;position:relative}body #header,body #header #avatar{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center}body #header #avatar{-webkit-box-pack:center;-webkit-justify-content:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-moz-border-radius:50%;border-radius:50%;height:48px;width:48px;overflow:hidden;margin-right:4px;cursor:pointer;-webkit-transition:125ms;-o-transition:125ms;-moz-transition:125ms;transition:125ms}body #header #avatar .icon{height:36px;width:36px;-moz-border-radius:50%;border-radius:50%;background-position:50%;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;background-repeat:no-repeat}body #header #avatar:hover{background-color:rgba(0,0,0,.06)}body #header .space{-webkit-box-flex:1;-webkit-flex:1 0;-moz-box-flex:1;-ms-flex:1 0;flex:1 0}body #header>.title{font-size:1.25rem;font-weight:500;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-decoration:none;margin-left:16px}body #header>.title,body #header>.title :focus,body #header>.title :visited{color:rgba(0,0,0,.54)}@media (max-width:768px){body #header>.title{padding-left:4px}}body #header>nav{-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap;margin-right:16px}body #header>nav,body #header>nav ul{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex}body #header>nav ul{list-style:none;margin:0}body #header>nav ul li a{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;font-size:24px;line-height:24px;-moz-border-radius:50%;border-radius:50%}body #header>nav ul li a:hover{background-color:rgba(0,0,0,.06)}@media (max-width:768px){body #header>nav{margin-right:0}}body #header.on{-webkit-box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4);-moz-box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4);box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4)}@media (max-width:768px){body #header{padding-left:16px;padding-right:16px}}body #header #header-search{line-height:48px;height:48px;-moz-border-radius:8px;border-radius:8px;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;background-color:#f5f5f5;-webkit-transition:125ms;-o-transition:125ms;-moz-transition:125ms;transition:125ms;overflow:hidden;-webkit-box-flex:1;-webkit-flex:1 1 50vw;-moz-box-flex:1;-ms-flex:1 1 50vw;flex:1 1 50vw;max-width:720px}body #header #header-search,body #header #header-search .icon{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex}body #header #header-search .icon{padding:12px 16px}body #header #header-search .icon svg{height:24px;width:24px;fill:rgba(0,0,0,.54)}body #header #header-search label{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;height:48px;width:100%}body #header #header-search input{font-family:Noto Sans SC,Microsoft YaHei UI,Microsoft YaHei UI Light,微软雅黑,Segoe UI Semibold,Roboto,sans-serif;background-color:transparent;color:rgba(0,0,0,.87);outline:none;border:none;width:100%;font-size:16px}body .card{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-moz-box-orient:vertical;-moz-box-direction:normal;-ms-flex-direction:column;flex-direction:column;background-color:#fff}body .card .title{font-size:1em;text-decoration:none;color:rgba(0,0,0,.87);padding-top:4px;-webkit-transition:125ms ease-in-out;-o-transition:125ms ease-in-out;-moz-transition:125ms ease-in-out;transition:125ms ease-in-out;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}',
+                'body{margin:0;background-color:#fff;max-height:100vh;min-width:360px;overflow:hidden;color:rgba(0,0,0,.87);font-family:Noto Sans SC,Microsoft YaHei UI,Microsoft YaHei UI Light,微软雅黑,Segoe UI Semibold,Roboto,sans-serif}body ul{margin:0;padding:0}body main{overflow-y:auto;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;max-height:-webkit-calc(100vh - 64px);max-height:-moz-calc(100vh - 64px);max-height:calc(100vh - 64px);min-width:360px}body p{margin:0;word-break:break-all}body #header{height:64px;padding-left:14px;padding-right:14px;display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;color:rgba(0,0,0,.87);background-color:#fff;-webkit-transition:125ms ease-in-out;-o-transition:125ms ease-in-out;-moz-transition:125ms ease-in-out;transition:125ms ease-in-out;z-index:10;position:relative}body #header .icon{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}body #header .icon .material-icons{color:rgba(0,0,0,.54)}body #header #avatar{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-moz-border-radius:50%;border-radius:50%;height:48px;width:48px;overflow:hidden;margin-right:4px;cursor:pointer;-webkit-transition:125ms;-o-transition:125ms;-moz-transition:125ms;transition:125ms}body #header #avatar .icon{height:36px;width:36px;-moz-border-radius:50%;border-radius:50%;background-position:50%;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;background-repeat:no-repeat}body #header #avatar:hover{background-color:rgba(0,0,0,.06)}body #header .space{-webkit-box-flex:1;-webkit-flex:1 0;-moz-box-flex:1;-ms-flex:1 0;flex:1 0}body #header>.title{font-size:1.25rem;font-weight:500;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-decoration:none;margin-left:16px}body #header>.title,body #header>.title :focus,body #header>.title :visited{color:rgba(0,0,0,.54)}@media (max-width:768px){body #header>.title{padding-left:4px}}body #header>nav{-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap;margin-right:16px}body #header>nav,body #header>nav ul{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex}body #header>nav ul{list-style:none;margin:0}body #header>nav ul li a{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;font-size:24px;line-height:24px;-moz-border-radius:50%;border-radius:50%}body #header>nav ul li a:hover{background-color:rgba(0,0,0,.06)}@media (max-width:768px){body #header>nav{margin-right:0}}body #header.on{-webkit-box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4);-moz-box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4);box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4)}@media (max-width:768px){body #header{padding-left:16px;padding-right:16px}}body #header #header-search{line-height:48px;height:48px;-moz-border-radius:8px;border-radius:8px;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;background-color:#f5f5f5;-webkit-transition:125ms;-o-transition:125ms;-moz-transition:125ms;transition:125ms;overflow:hidden;-webkit-box-flex:1;-webkit-flex:1 1 50vw;-moz-box-flex:1;-ms-flex:1 1 50vw;flex:1 1 50vw;max-width:720px}body #header #header-search,body #header #header-search .icon{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex}body #header #header-search .icon{padding:12px 16px}body #header #header-search .icon svg{height:24px;width:24px;fill:rgba(0,0,0,.54)}body #header #header-search label{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;height:48px;width:100%}body #header #header-search input{font-family:Noto Sans SC,Microsoft YaHei UI,Microsoft YaHei UI Light,微软雅黑,Segoe UI Semibold,Roboto,sans-serif;background-color:transparent;color:rgba(0,0,0,.87);outline:none;border:none;width:100%;font-size:16px}body .card{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-moz-box-orient:vertical;-moz-box-direction:normal;-ms-flex-direction:column;flex-direction:column;background-color:#fff}body .card .title{font-size:1em;text-decoration:none;color:rgba(0,0,0,.87);padding-top:4px;-webkit-transition:125ms ease-in-out;-o-transition:125ms ease-in-out;-moz-transition:125ms ease-in-out;transition:125ms ease-in-out;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}',
                 ''
             ]);
 
@@ -8487,6 +8510,172 @@
                     base64;
                 return '/*# ' + data + ' */';
             }
+
+            /***/
+        },
+        /* 32 */
+        /***/ function(module, exports, __webpack_require__) {
+            const logger = __webpack_require__(2);
+            const vars = __webpack_require__(14);
+            const config = vars.config;
+            module.exports = async () => {
+                const tpl = __webpack_require__(33);
+                config.error = {
+                    code: '404',
+                    message: 'Not found'
+                };
+                config.pageTitle = `${config.error.code} ${
+                    config.error.message
+                } - ${config.title}`;
+                document.documentElement.innerHTML = tpl.render(config);
+                GM_addStyle(__webpack_require__(30).toString());
+                GM_addStyle(__webpack_require__(34).toString());
+                // TODO 加焦点效果
+            };
+
+            /***/
+        },
+        /* 33 */
+        /***/ function(module, exports, __webpack_require__) {
+            var nunjucks = __webpack_require__(17);
+            var env;
+            if (!nunjucks.currentEnv) {
+                env = nunjucks.currentEnv = new nunjucks.Environment(
+                    [],
+                    undefined
+                );
+            } else {
+                env = nunjucks.currentEnv;
+            }
+            var dependencies =
+                nunjucks.webpackDependencies ||
+                (nunjucks.webpackDependencies = {});
+            dependencies['./include/content/content.tpl'] = __webpack_require__(
+                21
+            );
+
+            var shim = __webpack_require__(25);
+
+            (function() {
+                (nunjucks.nunjucksPrecompiled =
+                    nunjucks.nunjucksPrecompiled || {})[
+                    'src/view/error.tpl'
+                ] = (function() {
+                    function root(env, context, frame, runtime, cb) {
+                        var lineno = null;
+                        var colno = null;
+                        var output = '';
+                        try {
+                            var parentTemplate = null;
+                            env.getTemplate(
+                                './include/content/content.tpl',
+                                true,
+                                'src/view/error.tpl',
+                                false,
+                                function(t_3, t_2) {
+                                    if (t_3) {
+                                        cb(t_3);
+                                        return;
+                                    }
+                                    parentTemplate = t_2;
+                                    for (var t_1 in parentTemplate.blocks) {
+                                        context.addBlock(
+                                            t_1,
+                                            parentTemplate.blocks[t_1]
+                                        );
+                                    }
+                                    output += ' ';
+                                    (parentTemplate
+                                        ? function(e, c, f, r, cb) {
+                                              cb('');
+                                          }
+                                        : context.getBlock('content'))(
+                                        env,
+                                        context,
+                                        frame,
+                                        runtime,
+                                        function(t_5, t_4) {
+                                            if (t_5) {
+                                                cb(t_5);
+                                                return;
+                                            }
+                                            output += t_4;
+                                            if (parentTemplate) {
+                                                parentTemplate.rootRenderFunc(
+                                                    env,
+                                                    context,
+                                                    frame,
+                                                    runtime,
+                                                    cb
+                                                );
+                                            } else {
+                                                cb(null, output);
+                                            }
+                                        }
+                                    );
+                                }
+                            );
+                        } catch (e) {
+                            cb(runtime.handleError(e, lineno, colno));
+                        }
+                    }
+                    function b_content(env, context, frame, runtime, cb) {
+                        var lineno = null;
+                        var colno = null;
+                        var output = '';
+                        try {
+                            var frame = frame.push(true);
+                            output += '<div><h2>';
+                            output += runtime.suppressValue(
+                                runtime.memberLookup(
+                                    runtime.contextOrFrameLookup(
+                                        context,
+                                        frame,
+                                        'error'
+                                    ),
+                                    'code'
+                                ),
+                                env.opts.autoescape
+                            );
+                            output += ' - ';
+                            output += runtime.suppressValue(
+                                runtime.memberLookup(
+                                    runtime.contextOrFrameLookup(
+                                        context,
+                                        frame,
+                                        'error'
+                                    ),
+                                    'message'
+                                ),
+                                env.opts.autoescape
+                            );
+                            output += '</h2></div> ';
+                            cb(null, output);
+                        } catch (e) {
+                            cb(runtime.handleError(e, lineno, colno));
+                        }
+                    }
+                    return {
+                        b_content: b_content,
+                        root: root
+                    };
+                })();
+            })();
+
+            module.exports = shim(
+                nunjucks,
+                env,
+                nunjucks.nunjucksPrecompiled['src/view/error.tpl'],
+                dependencies
+            );
+
+            /***/
+        },
+        /* 34 */
+        /***/ function(module, exports, __webpack_require__) {
+            exports = module.exports = __webpack_require__(31)(false);
+            // Module
+            exports.push([module.i, '#main{padding:48px 64px 64px}', '']);
 
             /***/
         }

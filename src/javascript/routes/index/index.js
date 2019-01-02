@@ -6,5 +6,4 @@ module.exports = async () => {
     config.pageTitle = `${vars.user.uname} - ${config.title}`;
     document.documentElement.innerHTML = tpl.render(config);
     GM_addStyle(require('../../../style/style.css').toString());
-    // TODO 加焦点效果
 };

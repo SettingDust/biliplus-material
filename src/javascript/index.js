@@ -1,18 +1,14 @@
-const Router = require('./util/router'),
-    logger = require('./util/logger'),
-    Route = require('./util/route'),
-    router = new Router(),
+const logger = require('./util/logger'),
     utils = require('./util/utils'),
-    url = require('url'),
-    vars = require('./util/vars');
+    vars = require('./util/vars'),
+    router = require('./router');
 
-const hrefObj = url.parse(location.href);
-const href = `${hrefObj.host}${hrefObj.pathname}`;
+router();
 
 document.documentElement.lang = 'zh-cmn-Hans';
+
 $(() => {
     logger.debug(vars);
-
     const $main = $('main');
     $main.on('scroll', () => {
         utils.throttle(() => {
@@ -26,13 +22,16 @@ $(() => {
 
     const $avatar = $('#avatar');
     $avatar.children().css('background-image', `url(${vars.user.face})`);
+
+
+    // TODO 加搜索焦点效果、清空按钮
+    const $search = $('#header-search');
+    const $search_input = $search.find('input');
+    const search_text = $search_input.text();
+    $search.keyup((e) => {
+        if (e.which === 13
+            && search_text.length > 0) {
+            utils.search(search_text);
+        }
+    });
 });
-
-router.push(new Route('$', require('./routes/index')));
-//Whitelist
-router.push(new Route('[api|me]'));
-router.push(new Route('.*', require('./routes/error')));
-
-router.load(href);
-
-logger.debug(href);

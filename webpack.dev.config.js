@@ -2,6 +2,7 @@ const path = require('path');
 const monkey = require('./monkey.dev.config');
 const fs = require('fs');
 const webpack=require('webpack')
+const moment = require('moment');
 
 const Terser = require('terser-webpack-plugin');
 const colors = require('colors');
@@ -9,10 +10,9 @@ const colors = require('colors');
 if (!fs.existsSync('test')) fs.mkdirSync('test');
 fs.writeFileSync('./test/header.js', monkey.buildedHeader());
 
-const now = new Date();
 console.log(
     `[${colors.grey(
-        `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+        `${moment().format('HH:mm:ss')}`
     )}][${colors.grey('Webpack')}] ${colors.green(
         'Copy the content of test/header.js to your TamperMonkey plugin'
     )}`

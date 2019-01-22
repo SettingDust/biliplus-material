@@ -1,4 +1,4 @@
-module.exports = class Router {
+export default class Router {
     constructor() {
         this._routes = [];
     }
@@ -14,9 +14,11 @@ module.exports = class Router {
     load(href) {
         bpLogger.debug(this.routes);
         this.routes.some(route => {
-            if (route.test(href)) {
-                route.call(route.match(href)).then((result) => {
-                    if (result) return true;
+            if (route.route && route.test(href)) {
+                route.route.then((result) => {
+                    result.default(route.match(href)).then((result) => {
+                        if (result) return true;
+                    });
                 });
             }
         });

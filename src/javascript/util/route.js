@@ -23,13 +23,9 @@ class Route {
         if (link.input) return regex.exec(link.input);
         else return regex.exec(link);
     }
-
-    call(args) {
-        this.route(args);
-    }
 }
 
-module.exports = class BiliPlusRoute extends Route {
+export default class BiliPlusRoute extends Route {
     constructor(url, route) {
         super('www\\\.biliplus\\\.com/' + url, route);
     }

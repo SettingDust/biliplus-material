@@ -1,5 +1,5 @@
-module.exports = {
-    throttle: (fn, gapTime) => {
+export default {
+    bpThrottle: (fn, gapTime) => {
         let _lastTime = null;
 
         return () => {
@@ -10,9 +10,12 @@ module.exports = {
             }
         };
     },
-    search: (text) => {
+    bpSearch: (text) => {
+        bpLogger.debug(text);
         if (text.match(/\d+/)) {
             window.open(`/video/av${text}`);
+        } else {
+            location.assign(`/search?q=${text}`);
         }
     }
 };

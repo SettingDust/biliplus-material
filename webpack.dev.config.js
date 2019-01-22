@@ -1,6 +1,7 @@
 const path = require('path');
 const monkey = require('./monkey.dev.config');
 const fs = require('fs');
+const webpack=require('webpack')
 
 const Terser = require('terser-webpack-plugin');
 const colors = require('colors');
@@ -47,6 +48,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        })
         // new Terser({
         //     terserOptions: {
         //         mangle: false,

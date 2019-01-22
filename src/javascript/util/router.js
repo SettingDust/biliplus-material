@@ -1,4 +1,3 @@
-const logger = require('./logger');
 module.exports = class Router {
     constructor() {
         this._routes = [];
@@ -13,11 +12,12 @@ module.exports = class Router {
     }
 
     load(href) {
-        logger.debug(this.routes);
+        bpLogger.debug(this.routes);
         this.routes.some(route => {
             if (route.test(href)) {
-                route.call(route.match(href));
-                return true;
+                route.call(route.match(href)).then((result) => {
+                    if (result) return true;
+                });
             }
         });
     }

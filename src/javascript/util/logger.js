@@ -1,5 +1,5 @@
 const monkey = require('../../../monkey.config');
-module.exports = {
+export default {
     info: message => {
         console.info(`[${monkey.header.name}]`, message);
     },

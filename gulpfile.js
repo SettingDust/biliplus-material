@@ -48,6 +48,7 @@ gulp.task('webpack', callback =>
         );
     })
 );
+
 gulp.task('webpack:dev', () =>
     webpack(require('./webpack.dev.config'), (err, stats) => {
         if (err) console.log(err);

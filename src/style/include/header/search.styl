@@ -7,11 +7,12 @@
   height: 48px;
   border-radius: 8px;
   align-items: center;
-  background-color: md-grey-100;
-  transition: 125ms;
+  background-color: md-grey-200;
   overflow: hidden;
   flex: 1 1 50vw;
   max-width: 720px;
+  cursor: text;
+  transition: 225ms;
   
   .icon {
     display: flex;
@@ -39,5 +40,29 @@
     width: 100%;
     font-size: 16px;
     line-height: inherit;
+  }
+  
+  &:hover {
+    background-color: md-grey-100;
+  }
+  
+  #header-search-clear {
+    opacity: 0;
+    pointer-events: none;
+    transition: 125ms;
+    
+    i {
+      cursor: pointer;
+    }
+  }
+  
+  &.focusing, &.focus {
+    z-depth-2dp()
+    background-color: #fff;
+    
+    #header-search-clear {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 }

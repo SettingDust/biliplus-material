@@ -4,25 +4,31 @@
 #content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 16px;
+  grid-template-rows: calc(100vh - 80px);
   height: calc(100vh - 64px);
-  padding: 16px 12px;
+  padding-top: 16px;
   box-sizing: border-box;
   
   .column {
+    overflow: hidden;
+    
     a {
       text-decoration: none;
       color: inherit;
     }
     
     > header {
-      padding: 12px 24px;
+      padding: 12px 24px 24px;
       user-select: none;
       display: flex;
-      justify-content: space-between;
       align-items: flex-end;
       position: relative;
+      transition: 225ms ease-in-out;
+      z-index: 2;
+      
+      &.on {
+        z-depth-6dp();
+      }
       
       .title {
         font-size: 1.25em;
@@ -31,6 +37,7 @@
         margin-left: 8px;
         transition: 225ms;
         position: relative;
+        white-space: nowrap;
         
         &:before {
           content: '';
@@ -38,8 +45,8 @@
           left: -6px;
           height: 100%;
           width: calc(100% + 12px);
-          transform: scaleX(0);
-          transform-origin: left;
+          transform: scaleY(0);
+          transform-origin: bottom;
           pointer-events: none;
           transition: 225ms;
           z-index: -1;
@@ -49,26 +56,31 @@
           color: md-light-text-primary;
           
           &:before {
-            transform: scaleX(1);
+            transform: scaleY(1);
           }
+        }
+        
+        @media (max-width: 786px) {
+          font-size: 1em;
         }
       }
       
-      .more {
+      .top {
         position: relative;
         color: md-dark-text-secondary;
         font-size: .875em;
         line-height: 1.25em;
         transition: 125ms;
+        white-space: nowrap;
         
         &:hover {
           color: md-dark-text-primary;
         }
         
         &:before {
-          content: ': :'
+          content: '↑'
           position: absolute;
-          left: -10px;
+          right: -10px;
           bottom: 0;
           font-size: .675em;
           font-weight: 700;
@@ -81,7 +93,7 @@
         width: 6px;
         position: absolute;
         left: 16px;
-        top: 52%;
+        top: 44%;
         transform: translateY(-50%);
         pointer-events: none;
       }
@@ -89,27 +101,92 @@
       &:after {
         content: '';
         height: 18px;
-        width: calc(100% - 36px);
+        width: calc(100% - 24px);
         position: absolute;
         left: 16px + 3px + .5px;
-        top: 54%;
+        top: 44%;
         pointer-events: none;
       }
     }
     
     .card-list {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 32px 0 32px;
+      overflow-y: auto;
+      height: calc(100vh - 150px);
+      
       .card {
         margin-bottom: 16px;
+        border-radius: 8px;
+        background-color: md-white;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+        transition: 225ms ease-in-out;
+        
+        &:hover {
+          z-depth-4dp();
+        }
+        
+        .cover {
+          display: grid;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          overflow: hidden
+          
+          img {
+            width: 100%;
+          }
+        }
+        
+        .content {
+          padding: 8px 12px;
+          @media (max-width: 786px) {
+            padding: 4px 8px;
+          }
+          
+          .title {
+            display: flex;
+            margin-right: 8px;
+            padding: 0;
+            width: fit-content;
+            
+            h4 {
+              margin: 0;
+            }
+            
+            @media (max-width: 786px) {
+              font-size: .875em;
+            }
+          }
+          
+          .desc {
+            color: md-dark-text-secondary;
+          }
+        }
         
         &:last-child {
-          margin-bottom: 0;
+          margin-bottom: 64px;
         }
+      }
+      
+      @media (max-width: 1024px) {
+        padding: 16px 24px 0 24px;
+      }
+      @media (max-width: 786px) {
+        padding: 16px 16px 0 16px;
+        margin-right: 0;
       }
     }
     
     &:last-child {
       border-right: none;
     }
+    
+  }
+  
+  @media (max-width: 786px) {
+    width: 300%;
+    padding-top: 0;
   }
 }
 
@@ -123,6 +200,13 @@
           background-color: md-pink-400;
         }
       }
+    }
+    
+    #feed-count {
+      color: md-pink-400;
+      margin-left: 10px;
+      font-weight: 600;
+      line-height: 22px;
     }
     
     &:before {

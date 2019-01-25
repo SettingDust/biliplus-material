@@ -1,3 +1,4 @@
+
 export default async (ctx) => {
     // Init global vars
     window.bpLogger = (await import ('../util/logger')).default;

@@ -1,8 +1,10 @@
 import router from './router';
 
+// FIXME 这里没有封装为handlerManager类的原因是Webpack貌似有个坑，import无法使用变量（？）
+// TODO 遍历handler文件夹import
 const handlers = [
-    import ('./handlers/global'),
-    import ('./handlers/header')
+    import ('./handler/global'),
+    import ('./handler/header')
 ];
 
 Promise.all(handlers).then(async (e) => {

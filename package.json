@@ -33,6 +33,7 @@
     "webpack-cli": "^3.2.0"
   },
   "dependencies": {
+    "nanogallery2": "^2.3.0",
     "smooth-scrollbar": "^8.3.1",
     "throttle-debounce": "^2.1.0"
   }

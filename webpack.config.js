@@ -1,5 +1,6 @@
 const path = require('path');
 const monkey = require('./monkey.config');
+const webpack = require('webpack');
 
 const Terser = require('terser-webpack-plugin');
 const BannerPlugin = require('webpack/lib/BannerPlugin');

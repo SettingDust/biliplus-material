@@ -2,7 +2,9 @@ import tpl from '../../../view/index.tpl';
 
 const config = bpVars.config;
 const handlers = [
-    import ('./handler/feed')
+    import ('./handler/feed'),
+    import ('./handler/post'),
+    import ('./handler/dynamic')
 ];
 
 export default async () => {
@@ -13,7 +15,7 @@ export default async () => {
 
     Promise.all(handlers).then(async (e) => {
         for (const fn of e)
-            await fn.default();
+            fn.default();
     });
 
     return true;

@@ -1,19 +1,18 @@
-import card from '../../../../view/include/card/feed.tpl';
+import card from '../../../../view/include/card/video.tpl';
 import Scrollbar from 'smooth-scrollbar';
 import moment from 'moment';
 import { throttle, debounce } from 'throttle-debounce';
 
-const api = bpVars.api.dynamic.bangumi;
+const api = bpVars.api.dynamic.post;
 let currentPage = 1;
 let isLoading = false;
 
-function getFeeds(page) {
+function getPosts(page) {
     return new Promise((resolve, reject) => {
         $.get({
             url: api.replace('%page%', page),
             success: (data) => {
                 if (data.code === 0) {
-                    $('#feed-count').text(data.data.page.count);
                     resolve(data.data);
                 } else
                     reject(data);
@@ -26,42 +25,42 @@ function getFeeds(page) {
 }
 
 export default async () => {
-    const $feed = $('#feed .card-list');
+    const $post = $('#post .card-list');
     let scrollbar;
 
-    function appendFeeds(feeds) {
-        for (const feed of feeds) {
-            feed.create = moment(feed.addition.create).calendar();
+    function appendPosts(posts) {
+        for (const post of posts) {
+            post.create = moment(post.ctime * 1e3).calendar();
             if (scrollbar)
-                $(scrollbar.contentEl).append(card.render(feed));
+                $(scrollbar.contentEl).append(card.render(post));
             else
-                $feed.append(card.render(feed));
+                $post.append(card.render(post));
         }
         isLoading = false;
     }
 
-    async function appendNextFeeds() {
+    async function appendNextPosts() {
         isLoading = true;
-        appendFeeds((await getFeeds(currentPage++)).feeds);
+        appendPosts((await getPosts(currentPage++)).item);
     }
 
-    await appendNextFeeds();
-    scrollbar = Scrollbar.init($feed.get(0));
+    await appendNextPosts();
+    scrollbar = Scrollbar.init($post.get(0));
     scrollbar.addListener(debounce(200, async (status) => {
         if (status.limit.y - ($(window).width() > 2 ^ 10 ? 1e3 : 5e2) <= status.offset.y
             && !isLoading) {
-            await appendNextFeeds();
+            await appendNextPosts();
         }
     }));
     scrollbar.addListener(throttle(50, (status) => {
         if (status.offset.y > 0) {
-            $('#feed header').addClass('on');
+            $('#post header').addClass('on');
         } else {
-            $('#feed header').removeClass('on');
+            $('#post header').removeClass('on');
         }
     }));
     $(() => {
-        $('#feed .top').click(() => {
+        $('#post .top').click(() => {
             scrollbar.scrollTo(0, 0, 500);
         });
     });

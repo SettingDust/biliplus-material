@@ -16,9 +16,10 @@ export default {
     },
     api: {
         dynamic: {
-            video: '/me/dynamic/page/1/',
+            post: '/me/dynamic/page/1/%page%',
             bangumi: '/me/dynamic/page/102/%page%',
-            comment: '/me/dynamic/page/101/%page%'
+            comment: '/me/dynamic/page/101/%page%',
+            blog: '/me/dynamic_new/data?type=2&offset=%offset%'
         },
         live: '/me/dynamic/page/100/',
         search: {}

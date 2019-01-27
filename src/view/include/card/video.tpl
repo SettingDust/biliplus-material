@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card video">
     <a href="/{{ goto }}{{ param }}" target="_blank">
         <div class="cover">
             <img src="{{ cover }}" alt="{{ title }}">

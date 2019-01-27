@@ -16,9 +16,15 @@
         </div>
         <div class="pictures">
             {% for img in card.item.pictures %}
-                <div class="picture"
-                     style="width:{{ img.img_width * 256 / img.img_height }}px;flex-grow:{{ img.img_width * 256 / img.img_height }}">
-                    <i style="padding-bottom:{{ img.img_height / img.img_width * 100 }}%"></i>
+                <div class="picture{% if  img.img_height / img.img_width > 1.6 %} long{% endif %}"
+                     style="
+                     {% if  img.img_height / img.img_width > 1.6 %}
+                             width: {{ img.img_width * 128 / img.img_height }}px;
+                         {% else %}
+                                 width: {{ img.img_width * 128 / img.img_height }}px;
+                     {% endif %}
+                             flex-grow:{{ img.img_width * 128 / img.img_height }};
+                             ">
                     <img src="{{ img.img_src }}" alt="">
                 </div>
             {% endfor %}

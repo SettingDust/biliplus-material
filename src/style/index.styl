@@ -133,6 +133,7 @@
         background-color: md-white;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
         transition: 225ms ease-in-out;
+        overflow: hidden;
         
         &:hover {
           z-depth-4dp();
@@ -140,9 +141,7 @@
         
         .cover {
           display: grid;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          overflow: hidden
+          box-shadow: 1px 0 rgba(0, 0, 0, .12);
           
           img {
             width: 100%;
@@ -158,7 +157,7 @@
           .title {
             display: flex;
             margin-right: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             padding: 0;
             width: fit-content;
             
@@ -181,6 +180,8 @@
         }
         
         &.dynamic {
+          flex-direction: column;
+          
           header {
             display: flex;
             box-shadow: 0 1px rgba(0, 0, 0, 0.12);
@@ -228,14 +229,32 @@
               flex-wrap: wrap;
               
               .picture {
+                display: grid;
                 background-color: md-grey-200;
+                margin: 1px;
+                border-radius: 8px;
+                overflow: hidden;
+                max-height: 500px; //暂时解决长图
                 
                 img {
                   width: 100%;
                   vertical-align: bottom;
                 }
               }
+              
+              &.long {
+                &::after {
+                  content: ''
+                  flex-grow: 999999999;
+                }
+              }
             }
+          }
+        }
+        
+        &.feed, &.video {
+          .cover {
+            width: 180px;
           }
         }
       }

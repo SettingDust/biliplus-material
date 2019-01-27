@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card feed">
     <a href="/av{{ addition.aid }}" target="_blank">
         <div class="cover">
             <img src="{{ addition.pic }}" alt="{{ addition.description }}">

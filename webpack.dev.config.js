@@ -33,7 +33,7 @@ module.exports = {
                 exclude: /(node_modules)/,
                 use: [
                     { loader: 'nunjucks-loader' },
-                    { loader: 'htmlclean-loader' }
+                    { loader: 'html-minify-loader' }
                 ]
             },
             {

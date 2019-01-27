@@ -42,7 +42,6 @@ export default async () => {
             else
                 $dynamic.append(card.render(blog));
             lastBlog = blog.desc.dynamic_id_str;
-            bpLogger.debug(blog.card);
         }
         isLoading = false;
     }

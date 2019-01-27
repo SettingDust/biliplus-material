@@ -1,3 +1,4 @@
+let loginInfo;
 if (loginInfo)
     GM_setValue('user', loginInfo);
 const user = GM_getValue('user');

@@ -11,7 +11,7 @@ export default async () => {
     //Index
     router.push(new Route('$', import('./routes/index')));
     //Video
-    // router.push(new Route('av\d+$', syncImport('./routes/video')));
+    router.push(new Route('av\\d+', import('./routes/video/redirect')));
     // router.push(new Route('video/av\d+$', syncImport('./routes/video')));
     //Whitelist
     router.push(new Route('[api|me]'));

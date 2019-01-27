@@ -1,4 +1,5 @@
 import card from '../../../../view/include/card/dynamic.tpl';
+import largeImage from '../../../../view/include/photo-swipe.tpl';
 import Scrollbar from 'smooth-scrollbar';
 import moment from 'moment';
 import { throttle, debounce } from 'throttle-debounce';
@@ -69,8 +70,30 @@ export default async () => {
     }));
 
     $(() => {
-        $('#dynamic .top').click(() => {
+        const $dynamic = $('#dynamic');
+        $dynamic.find('.top').click(() => {
             scrollbar.scrollTo(0, 0, 500);
+        });
+
+        $('body').on('click', '#dynamic .picture', function() {
+            $('#pswp').remove();
+            $('#main').append(largeImage.render());
+            const $pictures = $(this).siblings('.picture').addBack();
+            const pictures = $pictures.map((_, e) => {
+                const image = new Image();
+                const src = $(e).find('img').attr('src');
+                image.src = src;
+                return {
+                    src,
+                    w: image.width,
+                    h: image.height
+                };
+            }).get();
+            const options = {
+                index: $pictures.index($(this))
+            };
+            const gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
+            gallery.init();
         });
     });
 }

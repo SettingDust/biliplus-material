@@ -18,11 +18,7 @@
             {% for img in card.item.pictures %}
                 <div class="picture{% if  img.img_height / img.img_width > 1.6 %} long{% endif %}"
                      style="
-                     {% if  img.img_height / img.img_width > 1.6 %}
                              width: {{ img.img_width * 128 / img.img_height }}px;
-                         {% else %}
-                                 width: {{ img.img_width * 128 / img.img_height }}px;
-                     {% endif %}
                              flex-grow:{{ img.img_width * 128 / img.img_height }};
                              ">
                     <img src="{{ img.img_src }}" alt="">

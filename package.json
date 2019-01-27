@@ -1,6 +1,6 @@
 {
-  "name": "webpack-tampermonkey",
-  "version": "0.0.1",
+  "name": "biliplus-material",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "build": "gulp build --color",

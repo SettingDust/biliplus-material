@@ -12,7 +12,11 @@ const header = {
     description: description,
     author: 'SettingDust',
     include: ['http*://*.biliplus.com/*'],
-    require: ['https://cdn.bootcss.com/jquery/3.3.1/jquery.js'],
+    require: [
+        'https://cdn.bootcss.com/jquery/3.3.1/jquery.js',
+        'https://cdn.bootcss.com/photoswipe/4.1.3/photoswipe.js',
+        'https://cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.js'
+    ],
     grant: ['GM_addStyle', 'GM_getValue', 'GM_setValue', 'GM_listValues']
 };
 module.exports.config = config;

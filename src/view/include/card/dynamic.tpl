@@ -1,12 +1,16 @@
-<div class="card dynamic">
+<div class="card dynamic" data-id="{{ desc.dynamic_id_str }}">
     <header>
-        <a class="up" href="/space/{{ desc.uid }}/">
+        <a class="up" href="/space/{{ desc.uid }}/" target="_blank">
             <img src="{{ desc.user_profile.info.face }}" alt="{{ desc.user_profile.info.uname }}">
         </a>
         <div class="info">
-            <a class="name" href="/space/{{ desc.uid }}/">{{ desc.user_profile.info.uname }}</a>
+            <a class="name" href="/space/{{ desc.uid }}/" target="_blank">{{ desc.user_profile.info.uname }}</a>
             <small class="desc">发表于{{ create }}</small>
         </div>
+        <div class="flex-space"></div>
+        <button class="open btn circle">
+            <i class="material-icons">open_in_new</i>
+        </button>
     </header>
     <div class="content">
         <div class="text">

@@ -17,11 +17,6 @@
   .column {
     overflow: hidden;
     
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    
     > header {
       padding: 12px 24px 24px;
       user-select: none;
@@ -129,15 +124,6 @@
       
       .card {
         margin-bottom: 16px;
-        border-radius: 8px;
-        background-color: md-white;
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
-        transition: 225ms ease-in-out;
-        overflow: hidden;
-        
-        &:hover {
-          z-depth-4dp();
-        }
         
         .cover {
           display: grid;
@@ -148,121 +134,28 @@
           }
         }
         
-        .content {
-          padding: 8px 12px;
-          width: calc(448px - 180px);
-          box-sizing: border-box;
-          @media (max-width: 786px) {
-            padding: 4px 8px;
-          }
-          
-          .title {
-            display: flex;
-            margin-right: 8px;
-            margin-bottom: 4px;
-            padding: 0;
-            transition: 125ms ease-in-out;
-            width: 100%;
-            
-            &:hover {
-              color: md-blue-500;
-            }
-            
-            h4 {
-              margin: 0;
-            }
-            
-            @media (max-width: 786px) {
-              font-size: .875em;
-            }
-          }
-          
-          .desc {
-            flex-direction: column;
-          }
-        }
-        
         &:last-child {
           margin-bottom: 64px;
-        }
-        
-        &.dynamic {
-          flex-direction: column;
-          
-          header {
-            display: flex;
-            box-shadow: 0 1px rgba(0, 0, 0, 0.12);
-            padding: 7px 8px;
-            align-items: center;
-            
-            .up {
-              height: 48px;
-              border-radius: 24px;
-              box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
-              overflow: hidden;
-              margin-right: 8px;
-              
-              img {
-                height: 100%;
-              }
-            }
-            
-            .info {
-              display: flex;
-              flex-direction: column;
-              
-              * {
-                width: fit-content;
-              }
-            }
-          }
-          
-          .content {
-            padding: 0;
-            
-            .text {
-              padding: 8px 12px;
-              
-              @media (max-width: 786px) {
-                padding: 4px 8px;
-              }
-            }
-            
-            .pictures {
-              border-bottom-left-radius: 8px;
-              border-bottom-right-radius: 8px;
-              overflow: hidden;
-              display: flex;
-              flex-wrap: wrap;
-              
-              .picture {
-                display: grid;
-                background-color: md-grey-200;
-                margin: 1px;
-                border-radius: 8px;
-                overflow: hidden;
-                max-height: 500px; //暂时解决长图
-                cursor: pointer;
-                
-                img {
-                  width: 100%;
-                  vertical-align: bottom;
-                }
-              }
-              
-              &.long {
-                &::after {
-                  content: ''
-                  flex-grow: 999999999;
-                }
-              }
-            }
-          }
         }
         
         &.feed, &.video {
           .cover {
             width: 180px;
+          }
+        }
+        
+        &.feed {
+          .content {
+            .desc {
+              small {
+                font-size: 80%;
+                
+                &:first-child {
+                  max-height: 19.2px
+                  overflow: hidden;
+                }
+              }
+            }
           }
         }
       }
@@ -287,6 +180,128 @@
     width: 300%;
     padding-top: 0;
     grid-template-rows: calc(100vh - 64px);
+  }
+}
+
+.card {
+  border-radius: 8px;
+  background-color: md-white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+  transition: 225ms ease-in-out;
+  overflow: hidden;
+  
+  &:hover {
+    z-depth-4dp();
+  }
+  
+  .content {
+    padding: 8px 12px;
+    box-sizing: border-box;
+    
+    @media (max-width: 786px) {
+      padding: 4px 8px;
+    }
+    
+    .title {
+      display: flex;
+      margin-right: 8px;
+      margin-bottom: 4px;
+      padding: 0;
+      transition: 125ms ease-in-out;
+      width: 100%;
+      overflow: hidden;
+      max-height: 3em;
+      
+      &:hover {
+        color: md-blue-500;
+      }
+      
+      h4 {
+        margin: 0;
+      }
+      
+      @media (max-width: 786px) {
+        font-size: .875em;
+      }
+    }
+    
+    .desc {
+      flex-direction: column;
+    }
+  }
+  
+  &.dynamic {
+    flex-direction: column;
+    
+    header {
+      display: flex;
+      box-shadow: 0 1px rgba(0, 0, 0, 0.12);
+      padding: 7px 8px;
+      align-items: center;
+      
+      .up {
+        height: 48px;
+        border-radius: 24px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        margin-right: 8px;
+        
+        img {
+          height: 100%;
+        }
+      }
+      
+      .info {
+        display: flex;
+        flex-direction: column;
+        
+        * {
+          width: fit-content;
+        }
+      }
+    }
+    
+    .content {
+      padding: 0;
+      
+      .text {
+        padding: 8px 12px;
+        
+        @media (max-width: 786px) {
+          padding: 4px 8px;
+        }
+      }
+      
+      .pictures {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        
+        .picture {
+          display: grid;
+          background-color: md-grey-200;
+          margin: 1px;
+          border-radius: 8px;
+          overflow: hidden;
+          max-height: 500px; //暂时解决长图
+          cursor: pointer;
+          
+          img {
+            width: 100%;
+            vertical-align: bottom;
+          }
+        }
+        
+        &.long {
+          &::after {
+            content: ''
+            flex-grow: 999999999;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -361,4 +376,13 @@
       box-shadow: -1px 1px md-orange-400;
     }
   }
+}
+
+#float-dynamic {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
 }

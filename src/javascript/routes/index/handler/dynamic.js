@@ -1,4 +1,5 @@
 import card from '../../../../view/include/card/dynamic.tpl';
+import floatCard from '../../../../view/include/card/float-dynamic.tpl';
 import largeImage from '../../../../view/include/photo-swipe.tpl';
 import Scrollbar from 'smooth-scrollbar';
 import moment from 'moment';
@@ -7,6 +8,7 @@ import { throttle, debounce } from 'throttle-debounce';
 const api = bpVars.api.dynamic.blog;
 let lastBlog = 0;
 let isLoading = false;
+let data;
 
 function getBlogs() {
     return new Promise((resolve, reject) => {
@@ -48,8 +50,13 @@ export default async () => {
     }
 
     async function appendNextBlogs() {
+        const blogs = (await getBlogs()).cards;
         isLoading = true;
-        appendBlogs((await getBlogs()).cards);
+        if (!data)
+            data = blogs;
+        else
+            data.concat(blogs);
+        appendBlogs(blogs);
     }
 
     await appendNextBlogs();
@@ -71,6 +78,7 @@ export default async () => {
 
     $(() => {
         const $dynamic = $('#dynamic');
+        const $body = $('body');
         $('#main').append(largeImage.render());
         $dynamic.find('.top').click(() => {
             scrollbar.scrollTo(0, 0, 500);
@@ -78,7 +86,7 @@ export default async () => {
 
         let gallery;
 
-        $('body').on('click', '#dynamic .picture', function() {
+        $body.on('click', '.dynamic .picture', function() {
             const $pictures = $(this).siblings('.picture').addBack();
             const pictures = $pictures.map((_, e) => {
                 const image = new Image();
@@ -96,6 +104,18 @@ export default async () => {
 
             gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
             gallery.init();
+        });
+
+        $body.on('click', '#dynamic .open', function() {
+            $('#float-dynamic').remove();
+            const $card = $(this).parents('.dynamic');
+            const id = $card.data('id');
+            let blog;
+            for (blog of data) {
+                if (blog.desc.dynamic_id_str === id)
+                    break;
+            }
+            $('#main').append(floatCard.render(blog));
         });
     });
 }

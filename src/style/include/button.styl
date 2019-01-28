@@ -1,0 +1,33 @@
+.btn {
+  display: flex;
+  align-items: center;
+  outline: 0;
+  border: 0;
+  padding: 7px 8px;
+  transition: 125ms ease-in-out;
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  &.circle {
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 24px;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, .12);
+    }
+  
+    &:focus {
+      background-color: rgba(0, 0, 0, .08);
+    }
+    
+    &:active {
+      background-color: rgba(0, 0, 0, .20);
+    }
+  }
+  
+  .material-icons {
+    color: md-grey-800;
+  }
+}

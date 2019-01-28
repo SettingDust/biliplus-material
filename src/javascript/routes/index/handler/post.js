@@ -6,6 +6,7 @@ import { throttle, debounce } from 'throttle-debounce';
 const api = bpVars.api.dynamic.post;
 let currentPage = 1;
 let isLoading = false;
+const indents = ['【', '《'];
 
 function getPosts(page) {
     return new Promise((resolve, reject) => {
@@ -31,6 +32,7 @@ export default async () => {
     function appendPosts(posts) {
         for (const post of posts) {
             post.create = moment(post.ctime * 1e3).calendar();
+            post.isIndent = indents.includes(post.title.substr(0, 1)) ? 'text-indent: -.5em;' : '';
             if (scrollbar)
                 $(scrollbar.contentEl).append(card.render(post));
             else

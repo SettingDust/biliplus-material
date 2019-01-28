@@ -150,6 +150,8 @@
         
         .content {
           padding: 8px 12px;
+          width: calc(448px - 180px);
+          box-sizing: border-box;
           @media (max-width: 786px) {
             padding: 4px 8px;
           }
@@ -159,7 +161,12 @@
             margin-right: 8px;
             margin-bottom: 4px;
             padding: 0;
-            width: fit-content;
+            transition: 125ms ease-in-out;
+            width: 100%;
+            
+            &:hover {
+              color: md-blue-500;
+            }
             
             h4 {
               margin: 0;

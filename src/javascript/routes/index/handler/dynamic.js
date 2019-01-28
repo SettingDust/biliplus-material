@@ -71,13 +71,14 @@ export default async () => {
 
     $(() => {
         const $dynamic = $('#dynamic');
+        $('#main').append(largeImage.render());
         $dynamic.find('.top').click(() => {
             scrollbar.scrollTo(0, 0, 500);
         });
 
+        let gallery;
+
         $('body').on('click', '#dynamic .picture', function() {
-            $('#pswp').remove();
-            $('#main').append(largeImage.render());
             const $pictures = $(this).siblings('.picture').addBack();
             const pictures = $pictures.map((_, e) => {
                 const image = new Image();
@@ -92,7 +93,8 @@ export default async () => {
             const options = {
                 index: $pictures.index($(this))
             };
-            const gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
+
+            gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
             gallery.init();
         });
     });

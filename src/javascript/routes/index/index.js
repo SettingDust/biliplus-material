@@ -4,7 +4,7 @@ const config = bpVars.config;
 const handlers = [
     import ('./handler/feed'),
     import ('./handler/post'),
-    import ('./handler/dynamic')
+    import ('./handler/dynamic/dynamic')
 ];
 
 export default async () => {

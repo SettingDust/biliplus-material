@@ -1,0 +1,33 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 32px 0 32px;
+  overflow-y: auto;
+  height: calc(100vh - 150px);
+  
+  .card {
+    margin-bottom: 16px;
+    
+    .cover {
+      display: grid;
+      box-shadow: 1px 0 rgba(0, 0, 0, .12);
+      
+      img {
+        width: 100%;
+      }
+    }
+    
+    &:last-child {
+      margin-bottom: 64px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 16px 24px 0 24px;
+  }
+  @media (max-width: 768px) {
+    padding: 16px 16px 0 16px;
+    margin-right: 0;
+    height: calc(100vh - 134px);
+  }
+}

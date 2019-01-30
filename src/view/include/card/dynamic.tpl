@@ -25,7 +25,8 @@
                              width: {{ img.img_width * 128 / img.img_height }}px;
                              flex-grow:{{ img.img_width * 128 / img.img_height }};
                              ">
-                    <img src="{{ img.img_src }}" alt="">
+                    <img src="{{ img.img_src }}{{ '@450w' if img.img_width > 450 }}" alt=""
+                         data-width="{{ img.img_width }}" data-height="{{ img.img_height }}">
                 </div>
             {% endfor %}
         </div>

@@ -1,0 +1,47 @@
+.card {
+  border-radius: 8px;
+  background-color: md-white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+  transition: 225ms ease-in-out;
+  overflow: hidden;
+  
+  &:hover {
+    z-depth-4dp();
+  }
+  
+  .content {
+    padding: 8px 12px;
+    box-sizing: border-box;
+    
+    @media (max-width: 768px) {
+      padding: 4px 8px;
+    }
+    
+    .title {
+      display: flex;
+      margin-right: 8px;
+      margin-bottom: 4px;
+      padding: 0;
+      transition: 125ms ease-in-out;
+      width: 100%;
+      overflow: hidden;
+      max-height: 3em;
+      
+      &:hover {
+        color: md-blue-500;
+      }
+      
+      h4 {
+        margin: 0;
+      }
+      
+      @media (max-width: 768px) {
+        font-size: .875em;
+      }
+    }
+    
+    .desc {
+      flex-direction: column;
+    }
+  }
+}

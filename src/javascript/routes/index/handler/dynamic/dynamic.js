@@ -1,8 +1,9 @@
-import card from '../../../../view/include/card/dynamic.tpl';
-import floatCard from '../../../../view/include/card/float-dynamic.tpl';
-import largeImage from '../../../../view/include/photo-swipe.tpl';
+import card from '../../../../../view/include/card/dynamic.tpl';
+import floatCard from '../../../../../view/include/card/float-dynamic.tpl';
+import largeImage from '../../../../../view/include/photo-swipe.tpl';
 import Scrollbar from 'smooth-scrollbar';
 import moment from 'moment';
+import floatDynamic from './float-dynamic';
 import { throttle, debounce } from 'throttle-debounce';
 
 const api = bpVars.api.dynamic.blog;
@@ -84,25 +85,22 @@ export default async () => {
             scrollbar.scrollTo(0, 0, 500);
         });
 
-        let gallery;
-
         $body.on('click', '.dynamic .picture', function() {
             const $pictures = $(this).siblings('.picture').addBack();
             const pictures = $pictures.map((_, e) => {
-                const image = new Image();
-                const src = $(e).find('img').attr('src');
-                image.src = src;
+                const img = $(e).find('img');
+                const src = img.attr('src').replace('@450w', '');
                 return {
                     src,
-                    w: image.width,
-                    h: image.height
+                    w: img.data('width'),
+                    h: img.data('height')
                 };
             }).get();
-            const options = {
-                index: $pictures.index($(this))
-            };
 
-            gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
+            const options = {
+                index: $(this).index()
+            };
+            const gallery = new PhotoSwipe($('#pswp').get(0), PhotoSwipeUI_Default, pictures, options);
             gallery.init();
         });
 
@@ -116,6 +114,7 @@ export default async () => {
                     break;
             }
             $('#main').append(floatCard.render(blog));
+            floatDynamic();
         });
     });
 }

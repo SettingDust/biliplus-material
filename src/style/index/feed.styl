@@ -1,0 +1,47 @@
+.card.feed {
+  .cover {
+    width: 180px;
+  }
+  
+  .content {
+    .desc {
+      small {
+        font-size: 80%;
+        
+        &:first-child {
+          max-height: 19.2px
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+#feed {
+  header {
+    .title {
+      color: md-pink-400;
+      
+      &:hover {
+        &:before {
+          background-color: md-pink-400;
+        }
+      }
+    }
+    
+    #feed-count {
+      color: md-pink-400;
+      margin-left: 10px;
+      font-weight: 600;
+      line-height: 22px;
+    }
+    
+    &:before {
+      background-color: md-pink-400;
+    }
+    
+    &:after {
+      box-shadow: -1px 1px md-pink-400;
+    }
+  }
+}

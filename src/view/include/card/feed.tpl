@@ -1,7 +1,7 @@
 <div class="card feed">
     <a href="/av{{ addition.aid }}" target="_blank">
         <div class="cover">
-            <img src="{{ addition.pic }}" alt="{{ addition.description }}">
+            <img src="" data-src="{{ addition.pic }}" alt="{{ addition.description }}" class="lazyload">
         </div>
     </a>
     <div class="content">

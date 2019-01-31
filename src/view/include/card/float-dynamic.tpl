@@ -9,6 +9,10 @@
                 <a class="name" href="/space/{{ desc.uid }}/" target="_blank">{{ desc.user_profile.info.uname }}</a>
                 <small class="desc">发表于{{ create }}</small>
             </div>
+            <div class="flex-space"></div>
+            <button class="top btn circle">
+                <i class="material-icons">arrow_upward</i>
+            </button>
         </header>
         <div class="content">
             <div class="text">
@@ -23,8 +27,8 @@
                                  width: {{ img.img_width * 128 / img.img_height }}px;
                                  flex-grow:{{ img.img_width * 128 / img.img_height }};
                                  ">
-                        <img src="{{ img.img_src }}" alt="" data-width="{{ img.img_width }}"
-                             data-height="{{ img.img_height }}">
+                        <img src="" data-src="{{ img.img_src }}" alt="" data-width="{{ img.img_width }}"
+                             data-height="{{ img.img_height }}" class="lazyload">
                     </div>
                 {% endfor %}
             </div>

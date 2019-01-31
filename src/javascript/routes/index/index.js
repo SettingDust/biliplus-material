@@ -1,4 +1,5 @@
 import tpl from '../../../view/index.tpl';
+import lazyLoad from './handler/lazyload';
 
 const config = bpVars.config;
 const handlers = [
@@ -13,10 +14,15 @@ export default async () => {
     GM_addStyle((await import('../../../style/style.css')).default.toString());
     GM_addStyle((await import('../../../style/index.css')).default.toString());
 
-    Promise.all(handlers).then(async (e) => {
-        for (const fn of e)
-            fn.default();
-    });
+    const handleHandlers = (e) => {
+        Promise.all(e.map((fn, _) => {
+            return fn.default();
+        })).then(() => {
+            lazyLoad();
+        });
+    };
+
+    Promise.all(handlers).then(handleHandlers);
 
     return true;
 };

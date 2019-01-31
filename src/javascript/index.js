@@ -4,7 +4,7 @@ import router from './router';
 // TODO 遍历handler文件夹import
 const handlers = [
     import ('./handler/global'),
-    import ('./handler/header'),
+    import ('./handler/header')
 ];
 
 Promise.all(handlers).then(async (e) => {

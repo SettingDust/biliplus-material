@@ -11,7 +11,13 @@ export default async () => {
     const scrollbar = Scrollbar.init(floatDynamic.find('.content').get(0));
     $body.one('click', '#float-dynamic .mask', () => {
         scrollbar.destroy();
+        $body.off('click', '#float-dynamic .top');
         floatDynamic.fadeOut(225, () => floatDynamic.remove());
+    });
+
+    $body.on('click', '#float-dynamic .top', () => {
+        scrollbar.scrollTo(0, 0, 500);
+        $('#float-dynamic .top').blur();
     });
 
     scrollbar.addListener(throttle(50, (status) => {

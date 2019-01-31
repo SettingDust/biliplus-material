@@ -1,7 +1,7 @@
 <div class="card video">
     <a href="/{{ goto }}{{ param }}" target="_blank">
         <div class="cover">
-            <img src="{{ cover }}" alt="{{ title }}">
+            <img src="" data-src="{{ cover }}" alt="{{ title }}" class="lazyload">
         </div>
     </a>
     <div class="content">

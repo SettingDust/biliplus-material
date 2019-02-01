@@ -24,8 +24,8 @@
                 {% for img in card.item.pictures %}
                     <div class="picture{% if  img.img_height / img.img_width > 1.6 %} long{% endif %}"
                          style="
-                                 width: {{ img.img_width * 128 / img.img_height }}px;
-                                 flex-grow:{{ img.img_width * 128 / img.img_height }};
+                                 width: {{ img.img_width * 200 / img.img_height }}px;
+                                 flex-grow:{{ img.img_width * 200 / img.img_height }};
                                  ">
                         <img src="" data-src="{{ img.img_src }}" alt="" data-width="{{ img.img_width }}"
                              data-height="{{ img.img_height }}" class="lazyload">

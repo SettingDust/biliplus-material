@@ -56,20 +56,20 @@ export default async () => {
         if (!data)
             data = blogs;
         else
-            data.concat(blogs);
+            data = data.concat(blogs);
         appendBlogs(blogs);
     }
 
     await appendNextBlogs();
     scrollbar = Scrollbar.init($dynamic.get(0));
-    scrollbar.addListener(debounce(200, async (status) => {
+    scrollbar.addListener(debounce(1000 / 60 * 10, async (status) => {
         if (status.limit.y - ($(window).width() > 2 ^ 10 ? 1e3 : 5e2) <= status.offset.y
             && !isLoading) {
             await appendNextBlogs();
         }
     }));
 
-    scrollbar.addListener(throttle(50, (status) => {
+    scrollbar.addListener(throttle(1000 / 60 * 10, (status) => {
         if (status.offset.y > 0) {
             $('#dynamic header').addClass('on');
         } else {

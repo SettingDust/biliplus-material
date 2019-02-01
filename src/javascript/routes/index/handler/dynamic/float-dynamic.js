@@ -1,5 +1,6 @@
 import Scrollbar from 'smooth-scrollbar';
 import { throttle } from 'throttle-debounce';
+import { loadImage } from '../lazyload';
 
 export default async () => {
     const $body = $('body');
@@ -20,12 +21,16 @@ export default async () => {
         $('#float-dynamic .top').blur();
     });
 
-    scrollbar.addListener(throttle(50, (status) => {
+    const lazyLoad = loadImage(scrollbar);
+
+    scrollbar.addListener(throttle(1000 / 60 * 10, (status) => {
         const $header = floatDynamic.find('header');
         if (status.offset.y > 0) {
             $header.addClass('on');
         } else {
             $header.removeClass('on');
         }
+        lazyLoad();
     }));
+    lazyLoad();
 }

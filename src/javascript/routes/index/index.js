@@ -9,7 +9,7 @@ const handlers = [
 ];
 
 export default async () => {
-    config.pageTitle = `${bpVars.user.uname} - ${config.title}`;
+    config.pageTitle = `${bpVars.user.isLogin ? bpVars.user.uname : '未登录'} - ${config.title}`;
     document.documentElement.innerHTML = tpl.render(config);
     GM_addStyle((await import('../../../style/style.css')).default.toString());
     GM_addStyle((await import('../../../style/index.css')).default.toString());
@@ -22,7 +22,8 @@ export default async () => {
         });
     };
 
-    Promise.all(handlers).then(handleHandlers);
+    if (bpVars.user.isLogin)
+        Promise.all(handlers).then(handleHandlers);
 
     return true;
 };

@@ -14,6 +14,12 @@ export default async (ctx) => {
         const $avatar = $('#avatar');
         $avatar.children().css('background-image', `url(${bpVars.user.face})`);
 
+        if (bpVars.user.isLogin) {
+            $avatar.click(() => location.href = `https://www.biliplus.com/space/${bpVars.user.mid}`);
+        } else {
+            $avatar.click(() => location.href = 'https://www.biliplus.com/login');
+        }
+
         // TODO 加搜索焦点效果、清空按钮
         const $search = $('#header-search');
         const $search_input = $search.find('input');

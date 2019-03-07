@@ -1,22 +1,8 @@
 const path = require('path');
 const monkey = require('./monkey.dev.config');
-const fs = require('fs');
 const webpack = require('webpack');
-const moment = require('moment');
 
 const Terser = require('terser-webpack-plugin');
-const colors = require('colors');
-
-if (!fs.existsSync('test')) fs.mkdirSync('test');
-fs.writeFileSync('./test/header.js', monkey.buildedHeader());
-
-console.log(
-    `[${colors.grey(`${moment().format('HH:mm:ss')}`)}][${colors.grey(
-        'Webpack'
-    )}] ${colors.green(
-        'Copy the content of test/header.js to your TamperMonkey plugin'
-    )}`
-);
 
 module.exports = {
     entry: monkey.config.entry,

@@ -1,3 +1,27 @@
+{% macro content(content) %}
+    {% if card.origin %}
+    {% elseif card.aid %}
+    {% else %}
+        <div class="text">
+            {% for line in translateWrap(content.item.description) %}
+                <p>{{ line }}</p>
+            {% endfor %}
+        </div>
+        <div class="pictures">
+            {% for img in content.item.pictures %}
+                <div class="picture{% if  img.img_height / img.img_width > 1.6 %} long{% endif %}"
+                     style="
+                             width: {{ img.img_width * 128 / img.img_height }}px;
+                             flex-grow:{{ img.img_width * 128 / img.img_height }};
+                             ">
+                    <img src="" class="lazyload" data-src="{{ img.img_src }}{{ '@450w' if img.img_width > 450 }}" alt=""
+                         data-width="{{ img.img_width }}" data-height="{{ img.img_height }}">
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
 <div class="card dynamic" data-id="{{ desc.dynamic_id_str }}">
     <header>
         <a class="up" href="/space/{{ desc.uid }}/" target="_blank">
@@ -14,22 +38,6 @@
         </button>
     </header>
     <div class="content">
-        <div class="text">
-            {% for line in translateWrap(card.item.description) %}
-                <p>{{ line }}</p>
-            {% endfor %}
-        </div>
-        <div class="pictures">
-            {% for img in card.item.pictures %}
-                <div class="picture{% if  img.img_height / img.img_width > 1.6 %} long{% endif %}"
-                     style="
-                             width: {{ img.img_width * 128 / img.img_height }}px;
-                             flex-grow:{{ img.img_width * 128 / img.img_height }};
-                             ">
-                    <img src="" class="lazyload" data-src="{{ img.img_src }}{{ '@450w' if img.img_width > 450 }}" alt=""
-                         data-width="{{ img.img_width }}" data-height="{{ img.img_height }}">
-                </div>
-            {% endfor %}
-        </div>
+        {{ content(card) }}
     </div>
 </div>

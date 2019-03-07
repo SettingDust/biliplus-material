@@ -15,7 +15,8 @@ const header = {
     require: [
         'https://cdn.bootcss.com/jquery/3.3.1/jquery.js',
         'https://cdn.bootcss.com/photoswipe/4.1.3/photoswipe.js',
-        'https://cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.js'
+        'https://cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.js',
+        'https://cdn.bootcss.com/Ripple.js/1.2.1/ripple.min.js'
     ],
     grant: ['GM_addStyle', 'GM_getValue', 'GM_setValue', 'GM_listValues']
 };

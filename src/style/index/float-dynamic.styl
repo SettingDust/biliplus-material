@@ -53,6 +53,35 @@
       }
     }
     
+    footer {
+      .actions {
+        box-shadow: 0 -1px rgba(0, 0, 0, .12)
+        display: flex;
+        
+        .btn {
+          width: 100%;
+          box-shadow: 1px 0 rgba(0, 0, 0, .12)
+          border-radius: 0;
+          
+          .material-icons {
+            width: fit-content;
+            margin-right: 4px;
+            margin-left: 4px;
+          }
+          
+          .number {
+            text-align: center;
+            width: 100%;
+            color: md-grey-900;
+          }
+          
+          &:hover {
+            background-color: md-grey-100;
+          }
+        }
+      }
+    }
+    
     .pictures {
       .picture {
         max-height: unset;

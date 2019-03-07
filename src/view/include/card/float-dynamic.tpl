@@ -33,5 +33,21 @@
                 {% endfor %}
             </div>
         </div>
+        <footer>
+            <div class="actions">
+                <button class="btn forward">
+                    <i class="material-icons">forward</i>
+                    <span class="number">{{ desc.repost }}</span>
+                </button>
+                <button class="btn reply">
+                    <i class="material-icons">comment</i>
+                    <span class="number">{{ card.item.reply }}</span>
+                </button>
+                <button class="btn fav {{ 'on' if(desc.is_liked) }}">
+                    <i class="material-icons">{{ 'favorite' if(desc.is_liked) else 'favorite_border' }}</i>
+                    <span class="number">{{ desc.like }}</span>
+                </button>
+            </div>
+        </footer>
     </div>
 </div>

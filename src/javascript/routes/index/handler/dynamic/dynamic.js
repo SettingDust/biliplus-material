@@ -45,6 +45,7 @@ export default async () => {
                 $(scrollbar.contentEl).append(card.render(blog));
             else
                 $dynamic.append(card.render(blog));
+            console.log(blog.cards);
             lastBlog = blog.desc.dynamic_id_str;
         }
         isLoading = false;
@@ -110,7 +111,7 @@ export default async () => {
             const id = $card.data('id');
             let blog;
             for (blog of data) {
-                if (blog.desc.dynamic_id_str === id)
+                if (Number(blog.desc.dynamic_id_str) === Number(id))
                     break;
             }
             $('#main').append(floatCard.render(blog));

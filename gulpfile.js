@@ -2,7 +2,9 @@ const gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     prettier = require('gulp-prettier'),
     webpack = require('webpack'),
-    moment = require('moment');
+    moment = require('moment'),
+    monkey = require('./monkey.dev.config'),
+    fs = require('fs');
 const colors = require('colors');
 
 const paths = {
@@ -20,6 +22,21 @@ gulp.task('format:js', () => {
         .src(paths.js.all)
         .pipe(prettier())
         .pipe(gulp.dest(file => file.base));
+});
+
+gulp.task('monkey', () => {
+    if (!fs.existsSync('test')) fs.mkdirSync('test');
+    fs.writeFileSync('./test/header.js', monkey.buildedHeader());
+
+    console.log(
+        `[${colors.grey(`${moment().format('HH:mm:ss')}`)}] ${colors.green(
+            'Copy the content of test/header.js to your TamperMonkey plugin'
+        )}`
+    );
+});
+
+gulp.task('monkey:watch', () => {
+    gulp.watch('./monkey.config.js').on('change', gulp.series('monkey'));
 });
 
 gulp.task('format', gulp.series(gulp.parallel('format:js')));
@@ -66,5 +83,5 @@ gulp.task('build', gulp.series('stylus', 'webpack', 'format'));
 
 gulp.task(
     'default',
-    gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack:dev'))
+    gulp.series('stylus', gulp.parallel('stylus:watch', 'webpack:dev', 'monkey', 'monkey:watch'))
 );

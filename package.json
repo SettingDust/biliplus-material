@@ -18,7 +18,7 @@
     "html-minify-loader": "^1.4.0",
     "htmlclean": "^3.0.8",
     "htmlclean-loader": "^1.0.12",
-    "jquery": "^3.4.0",
+    "jquery": "^3.4.1",
     "material-colors": "^1.2.6",
     "material-shadows": "^3.0.1",
     "moment": "^2.24.0",
